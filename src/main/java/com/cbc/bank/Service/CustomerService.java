@@ -20,15 +20,15 @@ public class CustomerService {
 		return customerRepository.findAll();
 	}
     
-    public String updatePassword(String username,String password) {
+   public String updatePassword(String username,String currentPassword,String newPassword) {
 		Customer cust=customerRepository.findByCustomerUsername(username);
 	
-		if(cust!=null) {
-			cust.setCustomerPassword(password);
+		if(cust!=null && cust.getCustomerPassword().equals(currentPassword)) {
+			cust.setCustomerPassword(newPassword);
 			customerRepository.save(cust);
 			return "Customer password updated successfully.";
 		}
-		return "Wrong customer username. Enter the correct username.";
+		return "Wrong customer username or Password";
 	}
     public String transferFund( Integer senderAccountNo,  Integer receiverAccountNo, float amount) {
 		

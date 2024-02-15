@@ -35,7 +35,7 @@ public class CustomerService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 return BankUtils.getResponseEntity("Wrong customer username or Password", HttpStatus.INTERNAL_SERVER_ERROR);
+		 return BankUtils.getResponseEntity("Wrong customer username or Password", HttpStatus.UNAUTHORIZED);
 	}
    
    
@@ -57,12 +57,12 @@ public class CustomerService {
     			return BankUtils.getResponseEntity("Fund was transfered successfully.", HttpStatus.OK);
     			
     		}else if(findReceiverAccount==null) {
-    			return BankUtils.getResponseEntity("Wrong Receiver Account number. Enter correct Account Number.", HttpStatus.INTERNAL_SERVER_ERROR);
+    			return BankUtils.getResponseEntity("Wrong Receiver Account number. Enter correct Account Number.", HttpStatus.BAD_REQUEST);
     		}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
-		return BankUtils.getResponseEntity("You have insufficient balance to transfer fund.", HttpStatus.INTERNAL_SERVER_ERROR);
+		return BankUtils.getResponseEntity("You have insufficient balance to transfer fund.", HttpStatus.UNPROCESSABLE_ENTITY);
 		
 	}
 
